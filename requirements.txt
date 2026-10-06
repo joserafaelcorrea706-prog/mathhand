@@ -1,0 +1,8 @@
+streamlit>=1.39,<2
+streamlit-webrtc>=0.47,<1
+streamlit-autorefresh>=1.0.1,<2
+mediapipe==0.10.21
+numpy<2
+sympy>=1.12,<2
+plotly>=5.20,<7
+av>=12,<17
