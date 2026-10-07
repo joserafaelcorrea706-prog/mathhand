@@ -105,7 +105,7 @@ def find_critical_points(expr,derivative):
 
 st.title("Cálculo en Movimiento — MathHand")
 st.caption("Explora cálculo diferencial con gestos de la mano, cámara o controles manuales.")
-st_autorefresh(interval=500,key="mathhand-refresh")
+st_autorefresh(interval=2000,key="mathhand-refresh")
 if "func_text" not in st.session_state: st.session_state.func_text="x**3 - 3*x"
 if "a" not in st.session_state: st.session_state.a=1.0
 with st.form("function_form"):
@@ -123,7 +123,7 @@ camcol,resultcol=st.columns([1,2])
 with camcol:
     st.subheader("Cámara y modo")
     st.warning("Al iniciar la cámara, el video se transmite al servidor de MathHand para reconocer los dedos.")
-    ctx=webrtc_streamer(key="mathhand-camera",video_processor_factory=HandProcessor,media_stream_constraints={"video":True,"audio":False},rtc_configuration={"iceServers":[{"urls":["stun:stun.l.google.com:19302"]}]},async_processing=True)
+    ctx=webrtc_streamer(key="mathhand-camera",video_processor_factory=HandProcessor,media_stream_constraints={"video":{"width":{"ideal":640},"height":{"ideal":480},"frameRate":{"ideal":15,"max":20}},"audio":False},rtc_configuration={"iceServers":[{"urls":["stun:stun.l.google.com:19302"]}]},async_processing=True)
     st.caption("Permite el acceso a la cámara. La transmisión se procesa para reconocer dedos.")
     st.markdown("**Selecciona el modo manualmente si la cámara no está disponible:**")
     mode=st.radio("Interacción",[1,2,3,4,5],horizontal=True,format_func=lambda m:{1:"1 dedo · Punto",2:"2 dedos · Tangente",3:"3 dedos · Derivadas",4:"4 dedos · Críticos",5:"5 dedos · Límites"}[m],label_visibility="collapsed")
